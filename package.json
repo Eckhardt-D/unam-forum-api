@@ -8,6 +8,7 @@
     "predev": "npm run prestart",
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "scraper": "node ./services/web-scraper.js",
     "precommit": "npm run prestart"
   },
   "repository": {
@@ -33,6 +34,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
-    "mongoose": "^5.6.6"
+    "mongoose": "^5.6.6",
+    "node-fetch": "^2.6.0"
   }
 }

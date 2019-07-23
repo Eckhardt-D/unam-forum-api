@@ -1,0 +1,38 @@
+{
+  "name": "unam-forum-api",
+  "version": "0.0.1",
+  "description": "An API for the University of Namibia's public forum.",
+  "main": "app.js",
+  "scripts": {
+    "prestart": "prettier --write \"**/*.js\"",
+    "predev": "npm run prestart",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "precommit": "npm run prestart"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eckhardt-D/unam-forum-api.git"
+  },
+  "keywords": [
+    "UNAM",
+    "API",
+    "UNAM",
+    "Forum"
+  ],
+  "author": "Eckhardt Dreyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eckhardt-D/unam-forum-api/issues"
+  },
+  "homepage": "https://github.com/Eckhardt-D/unam-forum-api#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.6"
+  }
+}

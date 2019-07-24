@@ -1,6 +1,16 @@
+const { DB_URL } = require("../config");
 const scraper = require("../services/web-scraper");
+const mongoose = require("mongoose");
 
-scraper
-  .update([])
-  .then(result => console.log(result))
-  .catch(err => console.error(err));
+module.exports = mongoose.connect(
+  DB_URL,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  },
+  err => {
+    if (!err) {
+      console.log("Database connected");
+    }
+  }
+);

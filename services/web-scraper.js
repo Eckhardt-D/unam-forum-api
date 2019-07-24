@@ -23,6 +23,7 @@ const getFullContent = async url => {
     let full_text = await $(".entry-content")
       .first()
       .text();
+
     let full_html = await $(".entry-content")
       .first()
       .html();

@@ -5,11 +5,13 @@ module.exports = async () => {
   Post.find().then(async posts => {
     if (posts.length > 0) {
       const missingPosts = await scraper.update(posts);
+
       if (missingPosts.length) {
         for (let i = 0; i < missingPosts.length; i++) {
           await Post.create(missingPosts[i]);
         }
       }
+
       return true;
     }
 
@@ -18,6 +20,7 @@ module.exports = async () => {
     for (let i = seededPosts.length; i >= 0; i--) {
       await Post.create(seededPosts[i]);
     }
+
     return true;
   });
 };

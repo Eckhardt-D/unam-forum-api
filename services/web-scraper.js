@@ -18,13 +18,13 @@ const getHTML = async url => {
 const getFullContent = async url => {
   try {
     let html = await getHTML(url);
-    let $ = await cheerio.load(html);
+    let $ = cheerio.load(html);
 
-    let full_text = await $(".entry-content")
+    let full_text = $(".entry-content")
       .first()
       .text();
 
-    let full_html = await $(".entry-content")
+    let full_html = $(".entry-content")
       .first()
       .html();
 
@@ -44,34 +44,34 @@ const parseCurrentPagePosts = async url => {
     for (let i = 0; i < len; i++) {
       const el = $(postArr[i]);
 
-      let post_id = await el[0].attribs.id;
+      let post_id = el[0].attribs.id;
 
-      let post_url = await el
+      let post_url = el
         .find($(".thumbnail-link"))
         .first()
         .attr("href");
 
-      let title = await el
+      let title = el
         .find($(".entry-title > a"))
         .first()
         .text();
 
-      let author = await el
+      let author = el
         .find($(".entry-author a[rel='author']"))
         .first()
         .text();
 
-      let summary = await el
+      let summary = el
         .find($(".entry-summary"))
         .first()
         .text();
 
-      let created = await el
+      let created = el
         .find($(".entry-date"))
         .first()
         .text();
 
-      let image = await el
+      let image = el
         .find(".thumbnail-wrap img")
         .first()
         .attr("src")

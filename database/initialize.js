@@ -2,21 +2,11 @@ const { DB_URL } = require("../config");
 const mongoose = require("mongoose");
 const seedDatabase = require("./seed");
 
-module.exports = mongoose.connect(
-  DB_URL,
-  {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-  },
-  async err => {
-    if (!err) {
-      await seedDatabase();
+const dbConfig = { useNewUrlParser: true, useFindAndModify: false };
 
-      setInterval(async () => {
-        await seedDatabase();
-      }, 3600000);
-
-      console.log("Database connected and seeded");
-    }
-  }
-);
+module.exports = mongoose.connect(DB_URL, dbConfig, async err => {
+  if (err) throw Error(err);
+  await seedDatabase();
+  setInterval(async () => await seedDatabase(), 3600000);
+  console.log("Database connected and seeded");
+});

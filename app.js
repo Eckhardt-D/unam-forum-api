@@ -1,6 +1,6 @@
 require("./services/version-check")(); // NODE version consistency.
 const { PORT } = require("./config"); // Check file for info.
-require("./database/initialize"); // Start database connection.
+require("./database/initialize"); // Start database connection and seed.
 
 // External dependencies
 const express = require("express");

@@ -1,6 +1,6 @@
 const { DB_URL } = require("../config");
-const scraper = require("../services/web-scraper");
 const mongoose = require("mongoose");
+const seedDatabase = require("./seed");
 
 module.exports = mongoose.connect(
   DB_URL,
@@ -8,9 +8,10 @@ module.exports = mongoose.connect(
     useNewUrlParser: true,
     useFindAndModify: false,
   },
-  err => {
+  async err => {
     if (!err) {
-      console.log("Database connected");
+      await seedDatabase();
+      console.log("Database connected and updated");
     }
   }
 );

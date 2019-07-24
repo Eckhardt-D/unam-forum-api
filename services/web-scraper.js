@@ -44,7 +44,7 @@ const parseCurrentPagePosts = async url => {
     for (let i = 0; i < len; i++) {
       const el = $(postArr[i]);
 
-      let id = await el[0].attribs.id;
+      let post_id = await el[0].attribs.id;
 
       let post_url = await el
         .find($(".thumbnail-link"))
@@ -82,7 +82,7 @@ const parseCurrentPagePosts = async url => {
       let { full_text, full_html } = page_content;
 
       posts.push({
-        id,
+        post_id,
         post_url,
         title,
         author,
@@ -110,7 +110,7 @@ const requestOK = async url => {
   }
 };
 
-const scrapeRecursive = async () => {
+const scrapeRecursive = async update => {
   try {
     let currentPage = 1;
     let paginationURL = baseURL + allPath + "/page/";
@@ -122,7 +122,11 @@ const scrapeRecursive = async () => {
 
       await parseCurrentPagePosts(paginationURL + currentPage);
 
-      currentPage++;
+      if (!update) {
+        currentPage++;
+      } else {
+        break;
+      }
     }
     return posts;
   } catch (e) {
@@ -130,9 +134,9 @@ const scrapeRecursive = async () => {
   }
 };
 
-async function main() {
+async function main(update = false) {
   try {
-    const parsed = await scrapeRecursive();
+    const parsed = await scrapeRecursive(update);
     posts = parsed;
   } catch (e) {
     return e;
@@ -152,12 +156,12 @@ async function update(databasePosts) {
   let missing = [];
 
   try {
-    await main();
+    await main(true);
 
-    if (databasePosts.length == posts.length) return true;
+    if (databasePosts[0].post_id == posts[0].post_id) return missing;
 
     for (let i = 0; i < posts.length; i++) {
-      if (posts[i] != databasePosts[0]) {
+      if (posts[i].post_id != databasePosts[0].post_id) {
         missing.push(posts[i]);
       }
     }

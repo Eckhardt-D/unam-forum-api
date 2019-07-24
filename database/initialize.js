@@ -11,7 +11,10 @@ module.exports = mongoose.connect(
   async err => {
     if (!err) {
       await seedDatabase();
-      console.log("Database connected and updated");
+      setInterval(async () => {
+        await seedDatabase();
+      }, 3600000);
+      console.log("Database connected and seeded");
     }
   }
 );

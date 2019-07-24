@@ -1,11 +1,9 @@
 {
   "name": "unam-forum-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An API for the University of Namibia's public forum.",
   "main": "app.js",
   "scripts": {
-    "prestart": "prettier --write \"**/*.js\"",
-    "predev": "npm run prestart",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "scraper": "node ./services/web-scraper.js",

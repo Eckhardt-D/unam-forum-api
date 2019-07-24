@@ -158,11 +158,11 @@ async function update(databasePosts) {
   try {
     await main(true);
 
-    if (databasePosts[0].post_id == posts[0].post_id) return missing;
-
-    for (let i = 0; i < posts.length; i++) {
-      if (posts[i].post_id != databasePosts[0].post_id) {
-        missing.push(posts[i]);
+    for (let i = 0; i < posts.length - 1; i++) {
+      if (posts[i].post_id != databasePosts[databasePosts.length - 1].post_id) {
+        missing.unshift(posts[i]);
+      } else {
+        break;
       }
     }
 

@@ -8,7 +8,7 @@ module.exports = async () => {
     if (posts.length > 0) {
       const missingPosts = await scraper.update(posts);
       if (missingPosts.length) {
-        for (let i = 0; i < missingPosts.length; i++) {
+        for (let i = missingPosts.length - 1; i >= 0; i--) {
           await Post.create(missingPosts[i]);
         }
       }
@@ -18,7 +18,7 @@ module.exports = async () => {
     // no: seed posts
     const seededPosts = await scraper.seed();
 
-    for (let i = 0; i < seededPosts.length; i++) {
+    for (let i = seededPosts.length; i >= 0; i--) {
       await Post.create(seededPosts[i]);
     }
     return true;

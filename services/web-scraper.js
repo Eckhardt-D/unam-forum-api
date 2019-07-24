@@ -34,6 +34,13 @@ const getFullContent = async url => {
   }
 };
 
+const parseCategories = classString => {
+  return classString
+    .split(" ")
+    .filter(s => s.indexOf("category-") != -1)
+    .map(c => c.replace("category-", ""));
+};
+
 const parseCurrentPagePosts = async url => {
   try {
     const html = await getHTML(url);
@@ -45,6 +52,8 @@ const parseCurrentPagePosts = async url => {
       const el = $(postArr[i]);
 
       let post_id = el[0].attribs.id;
+
+      let categories = parseCategories(el.attr("class"));
 
       let post_url = el
         .find($(".thumbnail-link"))
@@ -86,6 +95,7 @@ const parseCurrentPagePosts = async url => {
         post_url,
         title,
         author,
+        categories,
         summary,
         created,
         image,

@@ -5,6 +5,7 @@ const postSchema = new mongoose.Schema({
   post_url: String,
   title: String,
   author: String,
+  categories: [String],
   summary: String,
   created: String,
   image: String,

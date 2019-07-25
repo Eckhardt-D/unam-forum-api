@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "scraper": "node ./services/web-scraper.js",
-    "precommit": "npm run prestart"
+    "precommit": "npm run format",
+    "format": "prettier --config .prettierrc --write **/*.js"
   },
   "repository": {
     "type": "git",

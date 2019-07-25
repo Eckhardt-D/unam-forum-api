@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = new Router();
 
 const Post = require("../database/models/posts");
-const { setStart, setCount } = require("../services/query-handlers");
+const { setStart, setCount, getCategories } = require("../services/query-handlers");
 
 router.get("/", async (req, res) => {
   const posts = await Post.find();
@@ -11,8 +11,6 @@ router.get("/", async (req, res) => {
     data: [""],
     start,
     count,
-    from: new Date(),
-    to: new Date(),
   };
 
   start = setStart(start, posts.length);
@@ -20,7 +18,7 @@ router.get("/", async (req, res) => {
 
   response.data = posts.filter((_, index) => index >= start && index < start + count).reverse();
 
-  res.json({ from, to, ...response });
+  res.json(response);
 });
 
 router.get("/:id", async (req, res) => {

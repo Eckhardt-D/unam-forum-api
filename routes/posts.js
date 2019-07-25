@@ -23,4 +23,14 @@ router.get("/", async (req, res) => {
   res.json({ from, to, ...response });
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    post ? res.json(post) : res.sendStatus(404);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;

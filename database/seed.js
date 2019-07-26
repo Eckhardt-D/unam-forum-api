@@ -1,5 +1,6 @@
 const Post = require("./models/posts");
 const Category = require("./models/categories");
+const Author = require("./models/authors");
 const scraper = require("../services/web-scraper");
 
 const updateData = async posts => {
@@ -24,28 +25,28 @@ const seedData = async () => {
   return true;
 };
 
-const createCategories = async posts => {
+const createCategoriesAndAuthors = async posts => {
   for (let i = 0; i < posts.length; i++) {
     const post = posts[i];
-    const { categories } = post;
-
-    // Run check before looping, in case categories are same
-    const dbCategories = await Category.find();
-    if (dbCategories.length === categories.length) return true;
+    const { categories, author } = post;
+    const authorExists = await Author.findOne({ name: author });
 
     for (let j = 0; j < categories.length; j++) {
       const category = categories[j];
-
       const exists = await Category.findOne({ name: category });
       if (!exists) {
         await Category.create({ name: category });
       }
+    }
+
+    if (!authorExists) {
+      await Author.create({ name: author });
     }
   }
 };
 
 module.exports = async () => {
   const posts = await Post.find();
-  await createCategories(posts);
+  await createCategoriesAndAuthors(posts);
   return posts.length > 0 ? await updateData(posts) : await seedData();
 };

@@ -1,5 +1,6 @@
 ---
 title: Documentation
+description: Learn how to request resources from the UNAM Forum JSON API
 ---
 ## Getting started
 This page is the documentation of the API itself, the codebase has not been documented as of yet. If you would like to learn about it, for now you can check out the [repo](https://github.com/Eckhardt-D/unam-forum-api), or contact Eckhardt [support@kaizenmedia.co.za]().

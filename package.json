@@ -10,11 +10,16 @@
     "precommit": "npm run format",
     "format": "prettier --config .prettierrc --write **/*.js",
     "docs:dev": "vuepress dev static",
-    "docs:build": "vuepress build static"
+    "docs:build": "vuepress build static",
+    "heroku-postbuild": "npm run docs:build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eckhardt-D/unam-forum-api.git"
+  },
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.x"
   },
   "keywords": [
     "UNAM",

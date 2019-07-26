@@ -8,7 +8,9 @@
     "dev": "nodemon app.js",
     "scraper": "node ./services/web-scraper.js",
     "precommit": "npm run format",
-    "format": "prettier --config .prettierrc --write **/*.js"
+    "format": "prettier --config .prettierrc --write **/*.js",
+    "docs:dev": "vuepress dev static",
+    "docs:build": "vuepress build static"
   },
   "repository": {
     "type": "git",
@@ -28,7 +30,8 @@
   "homepage": "https://github.com/Eckhardt-D/unam-forum-api#readme",
   "devDependencies": {
     "nodemon": "^1.19.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "vuepress": "^1.0.2"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
